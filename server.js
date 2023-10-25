@@ -1,6 +1,8 @@
-const express = require('express');
+// Firebase admin SDK Authentication
 
-const admin = require('firebase-admin');
+const express = require('express');     //express - Creates an Express application. The express() function is a top-level function exported by the express module.
+
+const admin = require('firebase-admin');    //import the firebase-admin package
 
 const app = express();
 
@@ -22,7 +24,6 @@ admin.initializeApp({     // Initialize Firebase Admin SDK
 
 // Add body parsing middleware
 app.use(express.json());
-//express - Creates an Express application. The express() function is a top-level function exported by the express module.
 //json - Returns middleware that only parses json and only looks at requests where the Content-Type header matches the type option.
 
 
@@ -34,12 +35,11 @@ app.get('/', (req, res) => {
 });
 
 
-
-
-
 app.get('/create-user', async (req, res) =>{
   res.send('Create user dashboard.');
 });
+
+
 
 
 //Create new user
@@ -47,11 +47,13 @@ app.post('/create-user', async (req, res) => {
   
   const email = req.body.email;
   const password = req.body.password;
+  const role = req.body.password;
 
   try {
     const userRecord = await admin.auth().createUser({
       email,
       password,
+      role,
     });
 
     res.status(200).json(userRecord);
@@ -102,6 +104,21 @@ app.get('/view-users', async (req, res) => {
     res.status(200).json(users);      // For sending a JSON response.
   } catch (error) {
     res.status(500).send('Error fetching users');
+  }
+});
+
+
+
+
+// Delete a specific user
+app.delete('/delete-user', async (req, res) => {
+  const uid = req.body.uid;     // User's UID to delete
+
+  try {
+    await admin.auth().deleteUser(uid);
+    res.status(200).json({ message: 'User deleted successfully' });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
   }
 });
 
