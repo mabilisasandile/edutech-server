@@ -1,6 +1,6 @@
 const express = require('express');
+
 const admin = require('firebase-admin');
-const cookieParser = require('cookie-parser');
 
 const app = express();
 
@@ -18,7 +18,7 @@ admin.initializeApp({     // Initialize Firebase Admin SDK
   databaseURL: "https://edutech-app-eecfd-default-rtdb.firebaseio.com"
 });
 
-// app.use(cookieParser());
+
 
 // Add body parsing middleware
 app.use(express.json());
@@ -33,12 +33,6 @@ app.get('/', (req, res) => {
   res.send('Welcome to the admin dashboard!');
 });
 
-
-
-
-
-// Add necessary middleware
-// app.use(express.urlencoded({ extended: true }))
 
 
 
@@ -66,15 +60,15 @@ app.post('/', async (req, res) => {
 
 
 app.get('/add-admin', (req, res) => {
-  res.send('Admin settings dashboard!');
+  res.send('Admin settings dashboard.');
 });
 
-// Add a new admin endpoint
+
 // adding admin privileges to a user by setting custom claims using the Firebase Authentication SDK
-app.post('/add-admin', (req, res) => {
+app.post('/add-admin', (req, res) => {     // http://localhost:3000/add-admin
   const email = req.body.email; // Email of the new admin
 
-  // Add custom admin claims to the user
+  // Add custom admin claims to the user 
   admin
     .auth()
     .getUserByEmail(email)
@@ -94,5 +88,3 @@ app.post('/add-admin', (req, res) => {
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
-
-// curl -X POST -H "Content-Type: application/json" -d '{"email": "newadmin@example.com"}' http://localhost:3000/add-admin
