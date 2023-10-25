@@ -37,8 +37,13 @@ app.get('/', (req, res) => {
 
 
 
+app.get('/create-user', async (req, res) =>{
+  res.send('Create user dashboard.');
+});
+
+
 //Create new user
-app.post('/', async (req, res) => {
+app.post('/create-user', async (req, res) => {
   
   const email = req.body.email;
   const password = req.body.password;
@@ -59,13 +64,13 @@ app.post('/', async (req, res) => {
 
 
 
-app.get('/add-admin', (req, res) => {
+app.get('/add-admin-role', (req, res) => {
   res.send('Admin settings dashboard.');
 });
 
 
 // adding admin privileges to a user by setting custom claims using the Firebase Authentication SDK
-app.post('/add-admin', (req, res) => {     // http://localhost:3000/add-admin
+app.post('/add-admin-role', (req, res) => {     // http://localhost:3000/add-admin
   const email = req.body.email; // Email of the new admin
 
   // Add custom admin claims to the user 
@@ -81,6 +86,23 @@ app.post('/add-admin', (req, res) => {     // http://localhost:3000/add-admin
     .catch((error) => {
       res.status(400).json({ error: error.message });
     });
+});
+
+
+
+
+
+
+// Fetch and view user records
+app.get('/view-users', async (req, res) => {
+  try {
+    const userRecords = await admin.auth().listUsers();
+    const users = userRecords.users;
+    // res.render('users', { users });   // For rendering an HTML view.
+    res.status(200).json(users);      // For sending a JSON response.
+  } catch (error) {
+    res.status(500).send('Error fetching users');
+  }
 });
 
 
