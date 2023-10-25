@@ -4,7 +4,7 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Signup Page</title>
+    <title>Add Admin Page</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='mvp.css'>
 </head>
@@ -20,7 +20,7 @@
                 <button>Register</button>
             </form>
         </section>
-        <script>
+        <!-- <script>
             const firebaseConfig = {
                 apiKey: "AIzaSyCI6TYQ3ZYawor7WxjhTwKnDQKT8_Sj6gI",
                 authDomain: "edutech-app-eecfd.firebaseapp.com",
@@ -32,17 +32,13 @@
             };
             // Initialize Firebase
             const app = initializeApp(firebaseConfig);
-
             //Write the code which will register the user
             firebase.auth().setPersistence(firebase.auth.Auth.Persistence.None)
-
             document.getElementById('signup')
             .addEventListener('click',function(e){
                 e.preventDefault()
-
                 const login = event.target.login.value
                 const password = event.target.password.value
-
                 firebase.auth().createUserWithEmailAndPassword(login,password)
                 .then(({user}) => {
                     return user.getIdToken().then((idToken) => {
@@ -64,8 +60,7 @@
                     window.location.assign("/profile")
                 })
             })
-
-        </script>
+        </script> -->
     </main>
 
 </body>
