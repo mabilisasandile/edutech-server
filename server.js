@@ -50,11 +50,8 @@ app.post('/create-user', async (req, res) => {
   // const email = req.body.email;
   // const password = req.body.password;
   // const role = req.body.password;
-
-  const email = req.body;
-  const password = req.body;
-  const role = req.body;
-
+  const {email, password, role} = req.body
+  
   try {
     const userRecord = await admin.auth().createUser({
       email,
