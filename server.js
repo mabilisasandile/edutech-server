@@ -4,6 +4,10 @@ const express = require('express');     //express - Creates an Express applicati
 
 const admin = require('firebase-admin');    //import the firebase-admin package
 
+var cors = require('cors')
+
+app.use(cors())
+
 const app = express();
 
 const port = process.env.PORT || 4000;
