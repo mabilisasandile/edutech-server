@@ -6,8 +6,6 @@ const admin = require('firebase-admin');    //import the firebase-admin package
 
 var cors = require('cors')
 
-app.use(cors())
-
 const app = express();
 
 const port = process.env.PORT || 4000;
@@ -31,7 +29,7 @@ app.use(express.json());
 //json - Returns middleware that only parses json and only looks at requests where the Content-Type header matches the type option.
 
 
-
+app.use(cors());
 
 
 app.get('/', (req, res) => {
